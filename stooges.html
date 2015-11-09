@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<!-- State that Angular is to be used on the page.
+     Set the application name -->
+<html ng-app="stoogeApp">
+  <head>
+    <meta charset="utf-8" />
+    <title>Yay, JQuery!</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular.min.js"></script>
+    <script>
+      // Define the application module.
+      angular.module('stoogeApp', [])
+        // Define a controller - a controller is essentially a function.
+        // Dependancy injection - pass arguments the controller depends on.
+        .controller('StoogeController', function($scope) {
+          // Define properties as part of the $scope.
+          $scope.stooges = ['Larry', 'Curly', 'Moe'];
+          // Define functions to be used in the $scope.
+          $scope.addStooge = function() {
+            $scope.stooges.push($scope.stoogeName);
+            $scope.stoogeName = '';
+          };
+        });
+    </script>
+  </head>
+  <!-- Set a controller name. -->
+  <body ng-controller="StoogeController">
+    <!-- Set form submit action - JavaScript code to run on submit. -->
+    <form ng-submit="addStooge()">
+      <!-- Define the model for this input object - will have no default value. -->
+      <input type="text" name="name" autofocus ng-model="stoogeName">
+      <input type="submit" name="btn" value="Stoogify!">
+      <ul id="stooges">
+        <!-- Set list binding // foreach loop in Angular. -->
+        <li ng-repeat="stooge in stooges">
+          {{ stooge }} is a stooge.
+        </li>
+      </ul>
+    </form>
+  </body>
+</html>
